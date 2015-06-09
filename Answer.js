@@ -55,15 +55,12 @@ var selectorParser = {
   }
 };
 
-// The selector engine function to be called
 var $ = function (selector) {
   var elements = document.body.getElementsByTagName('*');
   var nextSelector;
   var selectors;
 
-  // This loop runs until all filters within `select` have been applied to the 'elements'
   while (selector !== nextSelector) {
-    // Set the selector to filter by next
     if (isFinalSelector(selector)) {
       nextSelector = selector;
     } else {
@@ -71,7 +68,6 @@ var $ = function (selector) {
       selector = selectors[0];
       nextSelector = selectors[1];
     }
-    // Apply filter to the `elements` array
     if (nextSelector.charAt(0) === '.') {
       elements = htmlToArray(elements).filter(hasClassSelector, nextSelector);
     } else if (nextSelector.charAt(0) === '#') {
